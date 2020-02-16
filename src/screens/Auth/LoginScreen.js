@@ -107,8 +107,10 @@ class LoginScreen extends Component {
 
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <Text>Chưa có tài khoản?</Text>
-          <TouchableOpacity>
-            <Text>Đăng ký</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Register')}
+          >
+            <Text style={{color: 'blue'}}>Đăng ký</Text>
           </TouchableOpacity>
         </View>
       </View>

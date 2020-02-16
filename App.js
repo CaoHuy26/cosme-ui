@@ -5,10 +5,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import allReducers from './src/reducers';
 import createSagaMiddleware from 'redux-saga';
-
-import { LoginScreen, RegisterScreen } from './src/screens/Auth';
-
 import rootSaga from './src/sagas';
+
+import AppNavigator from './src/navigators/AppNavigator';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(allReducers, applyMiddleware(sagaMiddleware));
@@ -18,7 +17,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
-        <RegisterScreen />
+        <AppNavigator />
       </SafeAreaView>
     </Provider>
   );
