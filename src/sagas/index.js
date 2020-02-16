@@ -1,9 +1,10 @@
 import { all } from 'redux-saga/effects';
-import loginWatcher from './authSagas';
+import { loginWatcher, registerWatcher } from './authSagas';
 
 function* rootSaga() {
   yield all([
-    loginWatcher()
+    loginWatcher(),
+    registerWatcher()
   ]);
 }
 

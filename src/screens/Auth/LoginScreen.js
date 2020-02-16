@@ -118,7 +118,7 @@ class LoginScreen extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.authReducers
+    user: state.loginReducers
   };
 };
 

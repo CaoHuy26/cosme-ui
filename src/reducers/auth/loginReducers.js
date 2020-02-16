@@ -1,4 +1,4 @@
-import ActionTypes from '../actions/types';
+import ActionTypes from '../../actions/types';
 
 const initialState = {
   user: null,
@@ -7,7 +7,7 @@ const initialState = {
   error: null
 };
 
-const authReducers = (state = initialState, action) => {
+const loginReducers = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.USER_LOGIN_REQUEST:
       return {
@@ -33,14 +33,11 @@ const authReducers = (state = initialState, action) => {
 
 
     case ActionTypes.USER_LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: action.isLoggedIn,
-        user: {}
-      }
+      return initialState;
+      
     default:
       return state;
   }
 };
 
-export default authReducers;
+export default loginReducers;
