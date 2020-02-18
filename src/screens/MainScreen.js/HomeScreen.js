@@ -1,9 +1,26 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import Swiper from 'react-native-swiper';
+
 import Category from "../../components/Category";
 import Product from "../../components/Product";
 import News from "../../components/News";
+
+const customDotSwiper = (
+  <View 
+    style={{
+      backgroundColor:'rgba(0,0,0,.2)',
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      marginLeft: 3,
+      marginRight: 3,
+      marginTop: 3,
+      marginBottom: 3
+    }} 
+  />
+)
 
 class HomeScreen extends Component {
   render() {
@@ -26,9 +43,17 @@ class HomeScreen extends Component {
               {/* NEWS */}
               <View>
                 <Text style={styles.textTitle}>News</Text>
-                <News imageNews={require("../../../assets/home.jpg")} />
-                <News imageNews={require("../../../assets/home.jpg")} />
-                <News imageNews={require("../../../assets/home.jpg")} />
+                <Swiper
+                  autoplay
+                  autoplayTimeout={3}
+                  dot={customDotSwiper}
+                  style={{height: 140}}
+                >
+                  <News imageNews={require("../../../assets/home.jpg")} />
+                  <News imageNews={require("../../../assets/home.jpg")} />
+                  <News imageNews={require("../../../assets/home.jpg")} />
+                </Swiper>
+                
               </View>
 
               {/* CATEGORY */}
