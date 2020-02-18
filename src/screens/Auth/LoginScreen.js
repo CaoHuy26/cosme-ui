@@ -7,7 +7,10 @@ import {
   TouchableOpacity,
   Dimensions
 } from "react-native";
+
+import { connect } from 'react-redux';
 import axios from "axios";
+import authActions from '../../actions/authActions';
 
 const { width } = Dimensions.get("window");
 
@@ -21,28 +24,35 @@ class LoginScreen extends Component {
     };
   }
 
-  handleLogin = async () => {
-    const user = {
-      email: this.state.emailInput,
-      password: this.state.passwordInput
-    };
-    try {
-      const res = await axios.post("http://localhost:3000/auth/login", user);
-      const { data } = res;
-      console.log(data);
-      if (data.statusCode === 200) {
-        alert(`Hello ${data.user.email}`);
-      }
-    } catch (error) {
-      alert("Login fail");
-    }
-  };
-
   render() {
+    console.log(this.props.user)
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.greeting}>Đăng nhập để tiếp tục</Text>
+          <Text style={styles.greeting}>
+            {
+              !this.props.user.isLoggedIn ? 'Đăng nhập để tiếp tục' : `Hello ${this.props.user.user.user.email}` 
+            }
+          </Text>
+        </View>
+        <Text style={{color: 'red'}}>
+          {
+            this.props.user.error ? `\nError: ${this.props.user.error}` : null
+          }
+        </Text>
+
+        <View>
+          {
+            this.props.user.isLoggedIn 
+            ? (
+                <TouchableOpacity
+                  onPress={() => this.props.onLogout()}
+                >
+                 <Text>Logout</Text>
+                </TouchableOpacity>
+              ) 
+            : null 
+          }
         </View>
 
         <View style={styles.form}>
@@ -50,7 +60,7 @@ class LoginScreen extends Component {
             <Text style={styles.inputTitle}>Địa chỉ email</Text>
             <TextInput
               style={styles.input}
-              autoCapitalize={false}
+              autoCapitalize='none'
               onChangeText={text => this.setState({ emailInput: text })}
             />
           </View>
@@ -59,18 +69,21 @@ class LoginScreen extends Component {
             <Text style={styles.inputTitle}>Mật khẩu</Text>
             <TextInput
               style={styles.input}
-              autoCapitalize={false}
+              autoCapitalize='none'
               onChangeText={text => this.setState({ passwordInput: text })}
             />
           </View>
         </View>
 
-        {/* 
-         TODO: Handle login logic here
-        */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => this.handleLogin()}
+          onPress={() => {
+            const user = {
+              email: this.state.emailInput,
+              password: this.state.passwordInput
+            };
+            this.props.onLogin(user)
+          }}
         >
           <Text style={{ fontWeight: "bold", color: "white" }}>Đăng nhập</Text>
         </TouchableOpacity>
@@ -94,15 +107,31 @@ class LoginScreen extends Component {
 
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <Text>Chưa có tài khoản?</Text>
-          <TouchableOpacity>
-            <Text>Đăng ký</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Register')}
+          >
+            <Text style={{color: 'blue'}}>Đăng ký</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
 }
-export default LoginScreen;
+
+const mapStateToProps = state => {
+  return {
+    user: state.loginReducers
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: (user) => dispatch(authActions.login(user)),
+    onLogout: () => dispatch(authActions.logout())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 
 const styles = StyleSheet.create({
   container: {
