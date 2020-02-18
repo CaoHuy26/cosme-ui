@@ -16,9 +16,9 @@ sagaMiddleware.run(rootSaga);
 export default function App() {
   return (
     <Provider store={store}>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <AppNavigator />
-      </SafeAreaView>
+      </View>
     </Provider>
   );
 }

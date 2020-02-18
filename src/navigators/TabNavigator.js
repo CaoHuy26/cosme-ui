@@ -49,7 +49,7 @@ const TabNavigatorConfigs = {
     activeTintColor: 'tomato',
     inactiveTintColor: 'gray',
     style: {
-      backgroundColor: 'pink',
+      backgroundColor: 'white',
     },
   },
 };

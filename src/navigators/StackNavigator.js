@@ -1,12 +1,11 @@
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import TabNavigator from './TabNavigator';
 import { LoginScreen, RegisterScreen } from '../screens/Auth';
+import TabNavigator from './TabNavigator';
 
 const StackNavigator = createStackNavigator({
-  Home: {
+  hihi: {
     screen: TabNavigator
   },
   Register: {
@@ -14,6 +13,4 @@ const StackNavigator = createStackNavigator({
   }
 });
 
-const AppNavigator = createAppContainer(StackNavigator);
-
-export default AppNavigator;
+export default StackNavigator;
