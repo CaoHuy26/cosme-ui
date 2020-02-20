@@ -1,13 +1,15 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-import { HomeScreen, NotificationScreen, OrderScreen, ProfileScreen } from '../screens/MainScreen.js';
-
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+import HomeStack from './StackNavigator/HomeStack';
+import NotificationStack from './StackNavigator/NotificationStack.js';
+import OrderStack from './StackNavigator/OrderStack';
+import ProfileStack from './StackNavigator/ProfileStack';
 
 const RouteConfigs = {
   Home: {
-    screen: HomeScreen,
+    screen: HomeStack ,
     navigationOptions: {
       title: 'HOME',
       tabBarIcon: () => (
@@ -16,7 +18,7 @@ const RouteConfigs = {
     }
   },
   Notification: {
-    screen: NotificationScreen,
+    screen: NotificationStack,
     navigationOptions: {
       title: 'NOTIFICATION',
       tabBarIcon: () => (
@@ -25,7 +27,7 @@ const RouteConfigs = {
     }
   },
   Order: {
-    screen: OrderScreen,
+    screen: OrderStack,
     navigationOptions: {
       title: 'ORDER',
       tabBarIcon: () => (
@@ -34,7 +36,7 @@ const RouteConfigs = {
     }
   },
   Profile: {
-    screen: ProfileScreen,
+    screen: ProfileStack,
     navigationOptions: {
       title: 'PROFILE',
       tabBarIcon: () => (
