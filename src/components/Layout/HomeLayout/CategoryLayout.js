@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { withNavigation } from 'react-navigation';
 import Category from '../../Category';
 
 class CategoryLayout extends Component {
@@ -15,18 +16,27 @@ class CategoryLayout extends Component {
     return (
       <View style={styles.container}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {this.state.data.map(category => (
-            <Category
-              imageUrl={require("../../../../assets/home.jpg")}
-              categoryTitle={category}
-            />
-          ))}
+          {
+            this.state.data.map(category => (
+              <TouchableOpacity
+                onPress={() => {
+                  const { navigation } = this.props;
+                  navigation.push('Category', category);
+                }}
+              >
+                <Category
+                  imageUrl={require("../../../../assets/home.jpg")}
+                  categoryTitle={category}
+                />
+              </TouchableOpacity>
+            ))
+          }
         </ScrollView>
       </View>
     );
   }
 }
-export default CategoryLayout;
+export default withNavigation(CategoryLayout);
 
 const styles = StyleSheet.create({
   container: {

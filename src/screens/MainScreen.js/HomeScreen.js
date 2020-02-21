@@ -25,7 +25,6 @@ class HomeScreen extends Component {
   }
   
   render() {
-    console.log(this.state)
     if (this.state.isLoading) {
       return (
         <View style={{

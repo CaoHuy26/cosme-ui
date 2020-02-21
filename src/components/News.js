@@ -4,8 +4,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get('window');
 
-//TODO: Change to carousel
-
 class News extends Component {
   render() {
     return (

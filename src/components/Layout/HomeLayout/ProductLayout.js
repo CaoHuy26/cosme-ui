@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { withNavigation } from 'react-navigation';
 import Product from "../../Product";
 
 const fakeDataProduct = [
@@ -43,12 +44,19 @@ class ProductLayout extends Component {
         <View style={styles.container}>
           {
             this.state.dataSource.map(product => (
-              <Product
-                imageUrl={require("../../../../assets/home.jpg")}
-                name={product.name}
-                price={product.price}
-                rating={product.rating}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  const { navigation } = this.props;
+                  navigation.push('ProductDetail', product);
+                }}
+              >
+                <Product
+                  imageUrl={require("../../../../assets/home.jpg")}
+                  name={product.name}
+                  price={product.price}
+                  rating={product.rating}
+                />
+              </TouchableOpacity>
             ))
           }
         </View>
@@ -56,7 +64,9 @@ class ProductLayout extends Component {
     }
   }
 }
-export default ProductLayout;
+
+// withNavigation: Access the navigation props to any component
+export default withNavigation(ProductLayout);
 
 const styles = StyleSheet.create({
   container: {

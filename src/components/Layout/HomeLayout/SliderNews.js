@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { withNavigation } from 'react-navigation';
 import Swiper from 'react-native-swiper';
-
 import News from "../../News";
 
 const customDotSwiper = (
@@ -19,6 +19,12 @@ const customDotSwiper = (
   />
 );
 
+//TODO: use dynamic data for silder -> NewsScreen
+// Slider dosen't use with array
+const uri1 = '../../../../assets/restaurant.jpg';
+const uri2 = '../../../../assets/experiences.jpg';
+const uri3 = '../../../../assets/home.jpg';
+
 class SliderNews extends Component {
   render() {
     return (
@@ -29,15 +35,16 @@ class SliderNews extends Component {
           dot={customDotSwiper}
           style={{ height: 140 }}
         >
-          <News imageNews={require("../../../../assets/home.jpg")} />
-          <News imageNews={require("../../../../assets/home.jpg")} />
-          <News imageNews={require("../../../../assets/home.jpg")} />
+          <News imageNews={require(uri1)} />
+          <News imageNews={require(uri2)} />
+          <News imageNews={require(uri3)} />
         </Swiper>
       </View>
     );
   }
 }
-export default SliderNews;
+
+export default withNavigation(SliderNews);
 
 const styles = StyleSheet.create({
   
