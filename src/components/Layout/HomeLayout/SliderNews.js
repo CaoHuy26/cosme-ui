@@ -21,9 +21,9 @@ const customDotSwiper = (
 
 //TODO: use dynamic data for silder -> NewsScreen
 // Slider dosen't use with array
-const uri1 = '../../../../assets/restaurant.jpg';
-const uri2 = '../../../../assets/experiences.jpg';
-const uri3 = '../../../../assets/home.jpg';
+const uri1 = '../../../assets/banner/banner1.jpg';
+const uri2 = '../../../assets/banner/banner2.jpg';
+const uri3 = '../../../assets/banner/banner3.jpg';
 
 class SliderNews extends Component {
   render() {
@@ -31,7 +31,7 @@ class SliderNews extends Component {
       <View>
         <Swiper
           autoplay
-          autoplayTimeout={3}
+          autoplayTimeout={5}
           dot={customDotSwiper}
           style={{ height: 140 }}
         >

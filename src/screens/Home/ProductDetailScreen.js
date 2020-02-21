@@ -38,7 +38,7 @@ class ProductDetail extends Component {
               height: 250,
             }}>
               <Image 
-                source={require('../../../assets/home.jpg')}
+                source={product.image}
                 style={styles.imageThumbnail}
               />
             </View>

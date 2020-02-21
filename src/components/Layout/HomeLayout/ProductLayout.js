@@ -5,19 +5,34 @@ import Product from "../../Product";
 
 const fakeDataProduct = [
   {
-    name: "Item 1",
-    price: "20$",
-    rating: 4
+    name: "SILKYGIRL TRULY NUDE",
+    price: "400.000 VND",
+    rating: 4,
+    image: require('../../../assets/product/fake_product1.jpg')
   },
   {
-    name: "Item 2",
-    price: "43$",
-    rating: 4
+    name: "MATTE LIP LIQUID",
+    price: "300.000 VND",
+    rating: 3,
+    image: require('../../../assets/product/fake_product2.jpg')
   },
   {
-    name: "Item 3",
-    price: "54$",
-    rating: 4
+    name: "Shower Gel Olive 60ML",
+    price: "250.000 VND",
+    rating: 4,
+    image: require('../../../assets/product/fake_product3.jpg')
+  },
+  {
+    name: "Colour Crush canberra tulip",
+    price: "420.000 VND",
+    rating: 5,
+    image: require('../../../assets/product/fake_product4.jpg')
+  },
+  {
+    name: "Shower Cream 250ML",
+    price: "350.000 VND",
+    rating: 4,
+    image: require('../../../assets/product/fake_product5.jpg')
   }
 ];
 
@@ -51,7 +66,7 @@ class ProductLayout extends Component {
                 }}
               >
                 <Product
-                  imageUrl={require("../../../../assets/home.jpg")}
+                  imageUrl={product.image}
                   name={product.name}
                   price={product.price}
                   rating={product.rating}

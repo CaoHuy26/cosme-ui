@@ -2,31 +2,25 @@ import React, { Component } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { withNavigation } from 'react-navigation';
 import Category from '../../Category';
+import CATEGORY from '../../../constants/category';
 
-class CategoryLayout extends Component {
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-      data: ['Home', 'Experience', 'Restaurent']
-    }
-  }
-  
+class CategoryLayout extends Component {  
   render() {
     return (
       <View style={styles.container}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {
-            this.state.data.map(category => (
+            CATEGORY.map(category => (
               <TouchableOpacity
+                key={category.id}
                 onPress={() => {
                   const { navigation } = this.props;
                   navigation.push('Category', category);
                 }}
               >
                 <Category
-                  imageUrl={require("../../../../assets/home.jpg")}
-                  categoryTitle={category}
+                  imageUrl={category.uri}
+                  categoryTitle={category.name.en}
                 />
               </TouchableOpacity>
             ))

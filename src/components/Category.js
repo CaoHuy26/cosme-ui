@@ -28,16 +28,19 @@ const styles = StyleSheet.create({
     height: 150,
     marginLeft: 20,
     borderWidth: 0.5,
-    borderColor: "#dddddd"
+    borderColor: "#dddddd",
+    borderRadius: 10,
   },
   imageThumbnail: {
     flex: 1,
     width: null,
     height: null,
-    resizeMode: "cover"
+    resizeMode: "cover",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
   },
   categoryTitle: {
     paddingLeft: 10,
-    paddingTop: 10
+    paddingTop: 15
   }
 });
