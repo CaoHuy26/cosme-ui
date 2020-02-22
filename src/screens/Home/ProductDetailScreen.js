@@ -3,72 +3,38 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   Dimensions,
   ScrollView,
   Button
 } from "react-native";
-import StarRating from "react-native-star-rating";
 
 import { ProductLayout } from '../../components/Layout/HomeLayout';
+import { ProductDetail } from '../../components/Genneral/Product';
 
 const { width } = Dimensions.get('window');
 
-class ProductDetail extends Component {
+class ProductDetailScreen extends Component {
   render() {
     const product = this.props.navigation.state.params;
-    /* 
-      <Text>Product Name: {product.name}</Text>
-      <Text>Product Price: {product.price}</Text>
-      <Text>Product Rating: {product.rating}</Text>
-    */
+
     return (
       <View style={styles.container}>
         <ScrollView 
           showsVerticalScrollIndicator={false}
           style={{flex: 1}}
         >
-          {/* Image */}
-          <View style={{
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-            <View style={{
-              width: width - 100,
-              height: 250,
-            }}>
-              <Image 
-                source={product.image}
-                style={styles.imageThumbnail}
-              />
-            </View>
-          </View>
-          
-          <View style={{paddingHorizontal: 20}}>
-            {/* Info */}
-            <View>
-              <Text>{product.name}</Text>
-              <Text>{product.price}</Text>
-              <StarRating
-                disabled={true}
-                maxStars={5}
-                rating={product.rating}
-                starSize={10}
-              />
-              {/* TODO: Add more info here */}
-              <Text>More info here....</Text>
-            </View>
-          </View>
+          {/* Product Detail */}
+          <ProductDetail product={product} />
 
           {/* Product has been seeen */}
           <View style={{ marginTop: 40 }}>
-            <Text style={styles.textTitle}>Sản phẩm đã xem</Text>
+            <Text style={[styles.textTitle, {paddingHorizontal: 20}]}>Sản phẩm đã xem</Text>
             <ProductLayout />
           </View>
 
           {/* Product similar */}
           <View style={{ marginTop: 40 }}>
-            <Text style={styles.textTitle}>Sản phẩm tương tự</Text>
+            <Text style={[styles.textTitle, {paddingHorizontal: 20}]}>Sản phẩm tương tự</Text>
             <ProductLayout />
           </View>    
         </ScrollView>
@@ -97,7 +63,7 @@ class ProductDetail extends Component {
     );
   }
 }
-export default ProductDetail;
+export default ProductDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -107,13 +73,7 @@ const styles = StyleSheet.create({
   textTitle: {
     fontSize: 24,
     fontWeight: "500",
-    paddingHorizontal: 20
-  },
-  imageThumbnail: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'cover'
+    marginVertical: 10
   },
   button: {
     width: width - 40,

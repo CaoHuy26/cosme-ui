@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet
 } from "react-native";
+import { DataTable } from 'react-native-paper';
 
 class NewsScreen extends Component {
   render() {
