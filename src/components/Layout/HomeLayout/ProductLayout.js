@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Button } from "react-native";
 import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
+import productActions from '../../../actions/productActions';
 import Product from "../../Product";
 
 const fakeDataProduct = [
@@ -47,24 +49,38 @@ class ProductLayout extends Component {
     super(props);
 
     this.state = {
-      isLoading: true,
-      dataSource: fakeDataProduct
+      // isLoading: true,
+      dataSource: null,
+      page: 1
     };
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     isLoading: false,
-  //     dataSource: fakeDataProduct
-  //   });
-  // }
+  componentDidMount() {
+    this.props.getProducts(this.state.page);
+    // console.log(`PROPS: ${JSON.stringify(this.props.productData, null, 4)}`)
+  }
+
+  handleLoadMore = () => {
+    this.setState({
+      page: this.state.page + 1
+    });
+    this.props.getProducts(this.state.page);
+    console.log(`STATE: ${JSON.stringify(this.props.productData.products, null, 4)}`)
+  }
 
   render() {
-    if (this.state.isLoading) {
+    if (this.props.productData.isFetching) {
+      return (
+        <View>
+          <ActivityIndicator size="small" color="pink" />
+        </View>
+      )
+    }
+    else {
       return (
         <View style={styles.container}>
           {
-            this.state.dataSource.map(product => (
+            this.props.productData.products.map(product => (
               <TouchableOpacity
                 onPress={() => {
                   const { navigation } = this.props;
@@ -72,7 +88,8 @@ class ProductLayout extends Component {
                 }}
               >
                 <Product
-                  imageUrl={product.image}
+                  key={product.id}
+                  imageUrl={require('../../../assets/product/fake_product2.jpg')}
                   name={product.name}
                   price={product.price}
                   rating={product.rating}
@@ -80,14 +97,35 @@ class ProductLayout extends Component {
               </TouchableOpacity>
             ))
           }
+          
+          
+          <View style={{marginVertical: 20}}>
+            <Button
+              title='Xem thêm'
+              onPress={() => this.handleLoadMore()}
+            />
+          </View>
+          
         </View>
       );
     }
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    productData: state.productReducers
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProducts: (page) => dispatch(productActions.getProducts(page))
+  }
+}
+
 // withNavigation: Access the navigation props to any component
-export default withNavigation(ProductLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(ProductLayout));
 
 const styles = StyleSheet.create({
   container: {
