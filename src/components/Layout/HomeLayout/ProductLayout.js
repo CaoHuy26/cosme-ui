@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import productActions from '../../../actions/productActions';
 import Product from "../../Product";
 
-const fakeDataProduct = [
+import axios from 'axios';
+
+const initialProductData = [
   {
     name: "SILKYGIRL TRULY NUDE",
     price: "400.000 VND",
@@ -35,12 +37,6 @@ const fakeDataProduct = [
     price: "420.000 VND",
     rating: 5,
     image: require('../../../assets/product/fake_product4.jpg')
-  },
-  {
-    name: "Shower Cream 250ML",
-    price: "350.000 VND",
-    rating: 4,
-    image: require('../../../assets/product/fake_product5.jpg')
   }
 ];
 
@@ -49,27 +45,44 @@ class ProductLayout extends Component {
     super(props);
 
     this.state = {
-      // isLoading: true,
-      dataSource: null,
+      isFetching: true,
+      products: [],
       page: 1
     };
   }
 
   componentDidMount() {
     this.props.getProducts(this.state.page);
-    // console.log(`PROPS: ${JSON.stringify(this.props.productData, null, 4)}`)
-  }
-
-  handleLoadMore = () => {
+    const { products, isFetching } = this.props.productData
     this.setState({
-      page: this.state.page + 1
+      isFetching: false, // this.props.productData.isFetching
+      products: this.state.products.concat(products)
     });
+  };
+
+  // TODO: Learn component lifecycle and use here
+
+  getData() {
     this.props.getProducts(this.state.page);
-    console.log(`STATE: ${JSON.stringify(this.props.productData.products, null, 4)}`)
-  }
+    const { products } = this.props.productData;
+    this.setState({
+      isFetching: false,
+      products: this.state.products.concat(products)
+    });
+  };
+
+  handleLoadMore () {
+    this.setState(
+      {
+        isFetching: true,
+        page: this.state.page + 1
+      }, 
+      this.getData
+    );
+  };
 
   render() {
-    if (this.props.productData.isFetching) {
+    if (this.state.isFetching) {
       return (
         <View>
           <ActivityIndicator size="small" color="pink" />
@@ -80,15 +93,15 @@ class ProductLayout extends Component {
       return (
         <View style={styles.container}>
           {
-            this.props.productData.products.map(product => (
+            this.state.products.map(product => (
               <TouchableOpacity
+                key={product.id}
                 onPress={() => {
                   const { navigation } = this.props;
                   navigation.push('ProductDetail', product);
                 }}
               >
                 <Product
-                  key={product.id}
                   imageUrl={require('../../../assets/product/fake_product2.jpg')}
                   name={product.name}
                   price={product.price}

@@ -3,7 +3,7 @@ import ActionTypes from '../actions/types';
 const initialState = {
   isFetching: true,
   success: false,
-  products: null,
+  products: [],
   error: null
 };
 

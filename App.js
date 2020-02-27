@@ -31,3 +31,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
 });
+
+
+// Turn off warnings
+console.disableYellowBox = true;

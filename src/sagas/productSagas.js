@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import ActionTypes from '../actions/types';
 
@@ -29,7 +29,7 @@ function* getProducts(pageRequest) {
 }
 
 function* getProductsWatcher() {
-  yield takeLatest(ActionTypes.PRODUCT_FETCH_REQUEST, getProducts);
+  yield takeEvery(ActionTypes.PRODUCT_FETCH_REQUEST, getProducts);
 }
 
 export {
