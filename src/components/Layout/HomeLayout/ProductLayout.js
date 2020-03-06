@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Button } from "react-native";
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import productActions from '../../../actions/productActions';
-import Product from "../../Product";
-
-import axios from 'axios';
+import productActions from '../../../actions/productActions';;
+import ListProduct from "../../Genneral/Product/ListProduct";
 
 const initialProductData = [
   {
@@ -92,7 +90,7 @@ class ProductLayout extends Component {
     else {
       return (
         <View style={styles.container}>
-          {
+          {/* {
             this.state.products.map(product => (
               <TouchableOpacity
                 key={product.id}
@@ -109,7 +107,8 @@ class ProductLayout extends Component {
                 />
               </TouchableOpacity>
             ))
-          }
+          } */}
+          <ListProduct products={this.state.products}/>
           
           
           <View style={{marginVertical: 20}}>
@@ -142,9 +141,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(Produ
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between"
   }
 });

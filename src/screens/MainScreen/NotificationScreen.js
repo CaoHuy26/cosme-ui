@@ -5,7 +5,7 @@ import {
   StyleSheet,
   FlatList
 } from "react-native";
-import Notification from '../../components/Notification';
+import { Notification } from '../../components/Genneral/Common';
 
 const fakeNotificationData = [
   {

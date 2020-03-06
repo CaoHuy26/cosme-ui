@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView, ActivityIndicator } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
 
-import axios from 'axios';
-
-import Category from "../../components/Category";
-import Product from "../../components/Product";
 import { Search, SliderNews, CategoryLayout, ProductLayout } from "../../components/Layout/HomeLayout";
 
 class HomeScreen extends Component {
