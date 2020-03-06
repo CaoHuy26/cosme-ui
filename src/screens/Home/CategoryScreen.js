@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   Button,
+  Text,
 } from "react-native";
 import { ProductLayout } from "../../components/Layout/HomeLayout";
 
@@ -10,6 +11,15 @@ class CategoryScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={{
+          alignItems: 'center',
+          marginTop: 20
+        }}>
+          <Text>
+            Category Name: {this.props.navigation.state.params.name.vn}
+          </Text>
+        </View>
+
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-evenly',
@@ -33,6 +43,7 @@ class CategoryScreen extends Component {
             />
           </View>
         </View>
+
 
         <ProductLayout />
       </View>

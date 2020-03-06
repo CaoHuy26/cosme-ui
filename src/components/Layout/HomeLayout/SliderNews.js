@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { withNavigation } from 'react-navigation';
 import Swiper from 'react-native-swiper';
-import News from "../../News";
+import { News } from "../../Genneral/Common";
 
 const customDotSwiper = (
   <View 

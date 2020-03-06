@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Button } from "react-native";
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import productActions from '../../../actions/productActions';
-import Product from "../../Product";
-
-import axios from 'axios';
+import productActions from '../../../actions/productActions';;
+import ListProduct from "../../Genneral/Product/ListProduct";
 
 const initialProductData = [
   {
@@ -40,6 +38,8 @@ const initialProductData = [
   }
 ];
 
+let query = {};
+
 class ProductLayout extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +52,11 @@ class ProductLayout extends Component {
   }
 
   componentDidMount() {
-    this.props.getProducts(this.state.page);
+    const { params } = this.props.navigation.state;
+    if (this.props.navigation.state.routeName === 'Category') {
+      query.categoryId = params.id;
+    }
+    this.props.getProducts(this.state.page, query);
     const { products, isFetching } = this.props.productData
     this.setState({
       isFetching: false, // this.props.productData.isFetching
@@ -63,7 +67,7 @@ class ProductLayout extends Component {
   // TODO: Learn component lifecycle and use here
 
   getData() {
-    this.props.getProducts(this.state.page);
+    this.props.getProducts(this.state.page, query);
     const { products } = this.props.productData;
     this.setState({
       isFetching: false,
@@ -82,6 +86,7 @@ class ProductLayout extends Component {
   };
 
   render() {
+    // console.log(`PROPS: ${JSON.stringify(this.props, null, 4)}`)
     if (this.state.isFetching) {
       return (
         <View>
@@ -92,25 +97,7 @@ class ProductLayout extends Component {
     else {
       return (
         <View style={styles.container}>
-          {
-            this.state.products.map(product => (
-              <TouchableOpacity
-                key={product.id}
-                onPress={() => {
-                  const { navigation } = this.props;
-                  navigation.push('ProductDetail', product);
-                }}
-              >
-                <Product
-                  imageUrl={require('../../../assets/product/fake_product2.jpg')}
-                  name={product.name}
-                  price={product.price}
-                  rating={product.rating}
-                />
-              </TouchableOpacity>
-            ))
-          }
-          
+          <ListProduct products={this.state.products}/>
           
           <View style={{marginVertical: 20}}>
             <Button
@@ -133,7 +120,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProducts: (page) => dispatch(productActions.getProducts(page))
+    getProducts: (page, query) => dispatch(productActions.getProducts(page, query))
   }
 }
 
@@ -142,9 +129,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(Produ
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between"
   }
 });

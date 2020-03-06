@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from 'react-navigation-stack';
-import { HomeScreen } from '../../screens/MainScreen.js/index.js';
+import { HomeScreen } from '../../screens/MainScreen/index.js';
 import { ProductDetailScreen, NewsScreen, CategoryScreen } from '../../screens/Home';
 
 const headerLeft = (

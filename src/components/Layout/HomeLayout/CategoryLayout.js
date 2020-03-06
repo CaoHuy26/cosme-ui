@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { withNavigation } from 'react-navigation';
-import Category from '../../Category';
+import { Category } from '../../Genneral/Common';
 import CATEGORY from '../../../constants/category';
 
 class CategoryLayout extends Component {  
