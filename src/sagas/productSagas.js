@@ -4,8 +4,17 @@ import ActionTypes from '../actions/types';
 
 function* getProducts(pageRequest) {
   try {
-    const { page } = pageRequest;
-    const res = yield axios.get(`http://localhost:3000/p/products?page=${page}`);
+    const { page, query } = pageRequest;
+    let productApi = `http://localhost:3000/p/products?page=${page}`;
+    if (query) {
+      const { categoryId } = query;
+      if (categoryId) {
+        productApi += `&categoryId=${categoryId}`;
+      }
+    }
+    console.log(`GET 👉 ${productApi}`);
+    
+    const res = yield axios.get(productApi);
     const { statusCode, data } = res.data;
     if (statusCode === 200) {
       yield put({

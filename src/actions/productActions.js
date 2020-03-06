@@ -1,10 +1,11 @@
 import ActionTypes from './types';
 
 const productActions = {
-  getProducts: (page) => {
+  getProducts: (page, query) => {
     return {
       type: ActionTypes.PRODUCT_FETCH_REQUEST,
-      page
+      page,
+      query
     }
   }
 };
