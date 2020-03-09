@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from 'react-navigation-stack';
 import { HomeScreen } from '../../screens/MainScreen/index.js';
 import { ProductDetailScreen, NewsScreen, CategoryScreen } from '../../screens/Home';
+import OrderIconWithBadge from '../../components/IconBadge/OrderIconWithBadge.js';
 
 const headerLeft = (
   <TouchableOpacity
@@ -22,13 +23,14 @@ const headerLeft = (
 const headerRight = (
   <View style={{
     flexDirection: 'row',
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    alignItems: 'center'
   }}>
     <View style={{paddingRight: 8}}>
       <TouchableOpacity
         onPress={() => alert('Click cart')}
       >
-        <Icon 
+        <OrderIconWithBadge
           name='ios-cart' 
           size={24}
           style={{}}

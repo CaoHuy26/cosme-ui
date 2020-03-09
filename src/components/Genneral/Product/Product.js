@@ -1,12 +1,32 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
 import StarRating from "react-native-star-rating";
 import Icon from "react-native-vector-icons/Ionicons";
+import { withNavigation } from 'react-navigation';
 
 const { width } = Dimensions.get("window");
 
 class Product extends Component {
+
+  _onRedirectToProductDetail = (navigation, product) => {
+    navigation.push('ProductDetail', product);
+  };
+
+  _onAddToCart = () => {
+    alert(`Add to cart: ${this.props.name}`);
+  };
+
   render() {
+    // TODO: Add more product info here
+    const { navigation } = this.props;
+    const { name, price, rating, imageUrl } = this.props;
+    const product = {
+      imageUrl,
+      name,
+      price,
+      rating
+    };
+
     return (
       <View style={styles.productCard}>
         <View style={{ flex: 1 }}>
@@ -24,9 +44,15 @@ class Product extends Component {
               justifyContent: "space-evenly"
             }}
           >
-            <Text style={styles.productName}>
-              {this.props.name}
-            </Text>
+            <TouchableOpacity
+              key={this.props.id}
+              onPress={() => this._onRedirectToProductDetail(navigation, product)}
+            >
+              <Text style={styles.productName}>
+                {this.props.name}
+              </Text>
+            </TouchableOpacity>
+            
             <Text>{this.props.price}</Text>
             <StarRating
               disabled={true}
@@ -43,14 +69,18 @@ class Product extends Component {
               paddingBottom: 5
             }}
           >
-            <Icon name="ios-cart" size={24} />
+            <TouchableOpacity
+              onPress={() => this._onAddToCart()}
+            >
+              <Icon name="ios-cart" size={24} />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
     );
   }
 }
-export default Product;
+export default withNavigation(Product);
 
 const styles = StyleSheet.create({
   productCard: {

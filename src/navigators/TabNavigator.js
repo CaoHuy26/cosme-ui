@@ -7,6 +7,9 @@ import NotificationStack from './StackNavigator/NotificationStack.js';
 import OrderStack from './StackNavigator/OrderStack';
 import ProfileStack from './StackNavigator/ProfileStack';
 
+import OrderIconWithBadge from '../components/IconBadge/OrderIconWithBadge';
+import NotificationIconWithBadge from '../components/IconBadge/NotificationIconBadge';
+
 const RouteConfigs = {
   Home: {
     screen: HomeStack ,
@@ -22,7 +25,7 @@ const RouteConfigs = {
     navigationOptions: {
       title: 'NOTIFICATION',
       tabBarIcon: () => (
-        <Icon name='ios-notifications' size={24}/>
+        <NotificationIconWithBadge name='ios-notifications' size={24}/>
       )
     }
   },
@@ -31,7 +34,7 @@ const RouteConfigs = {
     navigationOptions: {
       title: 'ORDER',
       tabBarIcon: () => (
-        <Icon name='ios-cart' size={24}/>
+        <OrderIconWithBadge name='ios-cart' size={24}/>
       )
     }
   },
