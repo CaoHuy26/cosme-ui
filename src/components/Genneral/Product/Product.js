@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "rea
 import StarRating from "react-native-star-rating";
 import Icon from "react-native-vector-icons/Ionicons";
 import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
+import cartActions from '../../../actions/cartActions';
 
 const { width } = Dimensions.get("window");
 
@@ -12,15 +14,18 @@ class Product extends Component {
     navigation.push('ProductDetail', product);
   };
 
-  _onAddToCart = () => {
-    alert(`Add to cart: ${this.props.name}`);
+  _onAddToCart = (product) => {
+    this.props.addToCart(product);
+    alert(`Add to cart: ${product.name}`);
   };
 
   render() {
+    // console.log(`PRODUCT PROPS: ${JSON.stringify(this.props, null, 4)}`)
     // TODO: Add more product info here
     const { navigation } = this.props;
-    const { name, price, rating, imageUrl } = this.props;
+    const { id, name, price, rating, imageUrl } = this.props;
     const product = {
+      id,
       imageUrl,
       name,
       price,
@@ -70,7 +75,7 @@ class Product extends Component {
             }}
           >
             <TouchableOpacity
-              onPress={() => this._onAddToCart()}
+              onPress={() => this._onAddToCart(product)}
             >
               <Icon name="ios-cart" size={24} />
             </TouchableOpacity>
@@ -80,7 +85,20 @@ class Product extends Component {
     );
   }
 }
-export default withNavigation(Product);
+
+const mapStateToProps = state => {
+  return {
+    carts: state.cartReducers
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (product) => dispatch(cartActions.addToCart(product))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(Product));
 
 const styles = StyleSheet.create({
   productCard: {

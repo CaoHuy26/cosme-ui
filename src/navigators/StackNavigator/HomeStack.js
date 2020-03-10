@@ -6,7 +6,7 @@ import { HomeScreen } from '../../screens/MainScreen/index.js';
 import { ProductDetailScreen, NewsScreen, CategoryScreen } from '../../screens/Home';
 import OrderIconWithBadge from '../../components/IconBadge/OrderIconWithBadge.js';
 
-const headerLeft = (
+const headerLeft = (navigation) => (
   <TouchableOpacity
     onPress={() => alert('Click menu')}
   >
@@ -20,7 +20,7 @@ const headerLeft = (
   </TouchableOpacity>
 );
 
-const headerRight = (
+const headerRight = (navigation) => (
   <View style={{
     flexDirection: 'row',
     paddingHorizontal: 20,
@@ -28,7 +28,7 @@ const headerRight = (
   }}>
     <View style={{paddingRight: 8}}>
       <TouchableOpacity
-        onPress={() => alert('Click cart')}
+        onPress={() => navigation.navigate('Order')}
       >
         <OrderIconWithBadge
           name='ios-cart' 
@@ -40,7 +40,7 @@ const headerRight = (
 
     <View style={{paddingLeft: 8}}>
       <TouchableOpacity
-        onPress={() => alert('Click person')}
+        onPress={() => navigation.navigate('Profile')}
       >
       <Icon 
         name='ios-person'
@@ -55,10 +55,10 @@ const HomeStack = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,
-      navigationOptions: {
-        headerLeft: () => headerLeft,
-        headerRight: () => headerRight
-      }
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: headerLeft(navigation),
+        headerRight: headerRight(navigation)
+      })
     },
     ProductDetail: {
       screen: ProductDetailScreen

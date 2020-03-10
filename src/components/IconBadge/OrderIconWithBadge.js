@@ -1,10 +1,20 @@
 import React from 'react';
-import IconWithBadge from "./IconWithBadge"
+import { connect } from 'react-redux';
+import IconWithBadge from "./IconWithBadge";
 
-const OrderIconWithBadge = props => {
-  // You should pass down the badgeCount in some other ways like:
-  // React Context API, Redux, MobX or event emitters.
-  return <IconWithBadge {...props} badgeCount={9} />;
+class OrderIconWithBadge extends React.Component {
+  render() {
+    const { total } = this.props.carts;
+    return (
+      <IconWithBadge {...this.props} badgeCount={total} />
+    )
+  }
 };
 
-export default OrderIconWithBadge;
+const mapStateToProps = state => {
+  return {
+    carts: state.cartReducers
+  }
+};
+
+export default connect(mapStateToProps)(OrderIconWithBadge);

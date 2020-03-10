@@ -7,13 +7,19 @@ import {
   ScrollView,
   Button
 } from "react-native";
-
+import { connect } from 'react-redux';
+import cartActions from '../../actions/cartActions';
 import { ProductLayout } from '../../components/Layout/HomeLayout';
 import { ProductDetail } from '../../components/Genneral/Product';
 
 const { width } = Dimensions.get('window');
 
 class ProductDetailScreen extends Component {
+  _onAddToCart = (product) => {
+    this.props.addToCart(product);
+    alert(`Add to cart: ${product.name}`);
+  };
+
   render() {
     const product = this.props.navigation.state.params;
 
@@ -53,7 +59,7 @@ class ProductDetailScreen extends Component {
               <Button
                 title='Thêm vào giỏ hàng'
                 color='white'
-                onPress={() => alert('Đã thêm hàng vào giỏ')}
+                onPress={() => this._onAddToCart(product)}
               />
             </View>
           </View>
@@ -63,7 +69,20 @@ class ProductDetailScreen extends Component {
     );
   }
 }
-export default ProductDetailScreen;
+
+const mapStateToProps = state => {
+  return {
+    carts: state.cartReducers
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (product) => dispatch(cartActions.addToCart(product))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetailScreen);
 
 const styles = StyleSheet.create({
   container: {

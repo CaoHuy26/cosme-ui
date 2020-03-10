@@ -9,6 +9,7 @@ class ListProduct extends Component {
         {
           this.props.products.map(product => (
             <Product
+              key={product.id}
               {...product}
               // TODO: Change imageUrl
               imageUrl={require('../../../assets/product/fake_product2.jpg')}
