@@ -6,6 +6,18 @@ const cartActions = {
       type: ActionTypes.ADD_TO_CART,
       product
     }
+  },
+  increaseQuantityOrderProduct: (orderProductId) => {
+    return {
+      type: ActionTypes.INCREASE_QUANTITY_ORDER_PRODUCT,
+      orderProductId
+    }
+  },
+  decreaseQuantityOrderProduct: (orderProductId) => {
+    return {
+      type: ActionTypes.DECREASE_QUANTITY_ORDER_PRODUCT,
+      orderProductId
+    }
   }
 };
 

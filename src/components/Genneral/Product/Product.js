@@ -4,6 +4,7 @@ import StarRating from "react-native-star-rating";
 import Icon from "react-native-vector-icons/Ionicons";
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
+import formatToVND from "../../../utils/formatToVND";
 import cartActions from '../../../actions/cartActions';
 
 const { width } = Dimensions.get("window");
@@ -29,7 +30,8 @@ class Product extends Component {
       imageUrl,
       name,
       price,
-      rating
+      rating,
+      quantityOrder: 1 // custom
     };
 
     return (
@@ -58,7 +60,7 @@ class Product extends Component {
               </Text>
             </TouchableOpacity>
             
-            <Text>{this.props.price}</Text>
+            <Text>{formatToVND(Number(this.props.price))}</Text>
             <StarRating
               disabled={true}
               maxStars={5}

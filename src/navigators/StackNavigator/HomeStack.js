@@ -56,8 +56,8 @@ const HomeStack = createStackNavigator(
     Home: {
       screen: HomeScreen,
       navigationOptions: ({ navigation }) => ({
-        headerLeft: headerLeft(navigation),
-        headerRight: headerRight(navigation)
+        headerLeft: () => headerLeft(navigation),
+        headerRight: () => headerRight(navigation)
       })
     },
     ProductDetail: {

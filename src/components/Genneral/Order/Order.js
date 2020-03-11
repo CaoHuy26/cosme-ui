@@ -1,10 +1,31 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
+import { connect } from 'react-redux';
+import formatToVND from "../../../utils/formatToVND";
+import cartActions from '../../../actions/cartActions';
 
 class Order extends Component {
+  /**
+   * this.props.orderProduct
+   * @param {string} id
+   * @param {string} imageUrl
+   * @param {string} name
+   * @param {number} price
+   * @param {number} quantityOrder
+   * 
+  */
+
+   _onIncrease = (orderProductId) => {
+    this.props.increaseQuantityOrderProduct(orderProductId);
+   }
+
+   _onDecrease = (orderProductId) => {
+    this.props.decreaseQuantityOrderProduct(orderProductId);
+   }
+
   render() {
-    console.log(`ORDER PROPS: ${JSON.stringify(this.props, null, 4)}`)
+    const { id, imageUrl, name, price, quantityOrder } = this.props.orderProduct;
     return (
       <View style={styles.order}>
         <View style={{flex: 1, flexDirection: 'row'}}>
@@ -20,8 +41,8 @@ class Order extends Component {
 
             {/* INFO */}
             <View style={{flex: 2, justifyContent: 'space-between', paddingVertical: 15}}>
-              <Text style={{paddingHorizontal: 10}}>{this.props.order.productName}</Text>
-              <Text style={{paddingHorizontal: 10}}>{this.props.order.price}</Text>
+              <Text style={{paddingHorizontal: 10}}>{name}</Text>
+              <Text style={{paddingHorizontal: 10}}>{formatToVND(Number(price))}</Text>
             </View>
           </View>
 
@@ -31,13 +52,18 @@ class Order extends Component {
             justifyContent: 'space-evenly',
             alignItems: 'center',
           }}>
-            <TouchableOpacity>
-              <Icon name='md-arrow-dropdown' size={32}/>
+            <TouchableOpacity
+              onPress={() => this._onIncrease(id)}
+            >
+              <Icon name='md-arrow-dropup' size={32}/>
             </TouchableOpacity>
             
-            <Text>1</Text>
-            <TouchableOpacity>
-             <Icon name='md-arrow-dropup' size={32}/>
+            <Text>{quantityOrder}</Text>
+
+            <TouchableOpacity
+              onPress={() => this._onDecrease(id)}
+            >
+             <Icon name='md-arrow-dropdown' size={32}/>
             </TouchableOpacity>
           </View>
 
@@ -46,7 +72,21 @@ class Order extends Component {
     );
   }
 }
-export default Order;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    increaseQuantityOrderProduct:
+      (orderProductId) => dispatch(
+        cartActions.increaseQuantityOrderProduct(orderProductId)
+      ),
+    decreaseQuantityOrderProduct:
+      (orderProductId) => dispatch(
+        cartActions.decreaseQuantityOrderProduct(orderProductId)
+      )
+  }
+};
+
+export default connect(null, mapDispatchToProps)(Order);
 
 const styles = StyleSheet.create({
   order: {
