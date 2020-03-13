@@ -5,14 +5,12 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  Button
 } from "react-native";
 import { connect } from 'react-redux';
 import cartActions from '../../actions/cartActions';
 import { ProductLayout } from '../../components/Layout/HomeLayout';
 import { ProductDetail } from '../../components/Genneral/Product';
-
-const { width } = Dimensions.get('window');
+import CustomButton from "../../components/Genneral/Common/CustomButton";
 
 class ProductDetailScreen extends Component {
   _onAddToCart = (product) => {
@@ -46,23 +44,11 @@ class ProductDetailScreen extends Component {
         </ScrollView>
 
         {/* Button */}
-        <View style={{ 
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: 20
-        }}>
-          <View style={styles.button}>
-            <View style={{
-              flex: 1,
-              justifyContent: 'center'
-            }}>
-              <Button
-                title='Thêm vào giỏ hàng'
-                color='white'
-                onPress={() => this._onAddToCart(product)}
-              />
-            </View>
-          </View>
+        <View style={{paddingVertical: 20}}>
+          <CustomButton 
+            title='Thêm vào giỏ hàng'
+            onPress={() => this._onAddToCart(product)}
+          />
         </View>
 
       </View>
@@ -93,11 +79,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "500",
     marginVertical: 10
-  },
-  button: {
-    width: width - 40,
-    height: 50,
-    backgroundColor: 'pink',
-    borderRadius: 10
   }
 });
