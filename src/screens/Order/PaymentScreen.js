@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import commonStyles from '../../styles/common';
-// import { ButtonHandleSubmitForm } from "../../components/Genneral/Order/Payment";
-import { CustomButton } from '../../components/Genneral/Common' 
+import { ButtonCustomerInfomationForm } from "../../components/Genneral/Order/Payment";
 import { OrderProductDetailList, TotalAmount, CustomerInformationForm} from "../../components/Genneral/Order/Payment";
 
 class PaymentScreen extends Component {
@@ -31,9 +30,8 @@ class PaymentScreen extends Component {
         </ScrollView>
         
         <View style={{padding: 20}}>
-          <CustomButton
+          <ButtonCustomerInfomationForm
             title="Đặt hàng"
-            onPress={() => alert('Đặt hàng thành công')}
           />
         </View>
 
