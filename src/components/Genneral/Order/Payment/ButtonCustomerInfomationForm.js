@@ -1,24 +1,27 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Button } from "react-native";
 import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation'
 import { reduxForm } from 'redux-form';
 import commonStyles from '../../../../styles/common';
 import { phoneNumber } from '../../../../constants/regExr';
 import { CUSTOMER_INFOMATION_FORM } from '../../../../constants/formName';
+import orderActions from '../../../../actions/orderActions';
+import cartActions from "../../../../actions/cartActions";
 
 const validate = values => {
   const errors = {};
-  if (!values.customerName) {
-    errors.customerName = 'Required';
+  if (!values.receiverName) {
+    errors.receiverName = 'Required';
   }
-  if (!values.customerAddress) {
-    errors.customerAddress = 'Required';
+  if (!values.shippingAddress) {
+    errors.shippingAddress = 'Required';
   }
-  if (!values.customerPhoneNumber) {
-    errors.customerPhoneNumber = 'Required';
+  if (!values.receiverPhone) {
+    errors.receiverPhone = 'Required';
   }
-  else if (!phoneNumber.test(values.customerPhoneNumber)) {
-    errors.customerPhoneNumber = 'Invalid phone number';
+  else if (!phoneNumber.test(values.receiverPhone)) {
+    errors.receiverPhone = 'Invalid phone number';
   }
 
   return errors;
@@ -28,12 +31,34 @@ class ButtonHandleSubmitForm extends Component {
   render() {
     // handleSubmit[Function]: A property of redux-form
     const { handleSubmit } = this.props;
+    
     const { productsInCart } = this.props.cart;
+    let totalOrder = 0;
+    for (let i = 0; i < productsInCart.length; i++) {
+      totalOrder += Number(productsInCart[i].price) * productsInCart[i].quantityOrder;
+    }
+    let discount = 0;
+    let transportFee = 0;
+    const totalMoney = totalOrder - discount + transportFee;
 
-    submitForm = customerInfo => {
-      alert(`Order success: ${JSON.stringify({customerInfo, productsInCart})}`);
+    submitForm = receiver => {
+      const newOrder = {
+        userId: 'b93e7a50-fa66-406d-9fae-ce912d7bda7f', //FIXME: change userId
+        receiverName: receiver.receiverName,
+        receiverPhone: receiver.receiverPhone,
+        shippingAddress: receiver.shippingAddress,
+        shippingDate: new Date(), //FIXME: change date
+        total: totalMoney,
+        products: productsInCart
+      };
+      this.props.createOrder(newOrder);
     };
 
+    if (this.props.order.success) {
+      alert('Đặt hành thành công');
+      this.props.navigation.navigate('Order');
+      this.props.removeAllCart();
+    }
     return (
       <View style={styles.container}>
         <View style={commonStyles.button}>
@@ -55,14 +80,23 @@ class ButtonHandleSubmitForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cartReducers
+    cart: state.cartReducers,
+    user: state.loginReducers,
+    order: state.orderReducers
   }
 };
 
-export default connect(mapStateToProps)(reduxForm({
+const mapDispatchToProps = dispatch => {
+  return {
+    createOrder: (order) => dispatch(orderActions.createOrder(order)),
+    removeAllCart: () => dispatch(cartActions.removeAllCart())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: CUSTOMER_INFOMATION_FORM,
   validate
-})(ButtonHandleSubmitForm));
+})(withNavigation(ButtonHandleSubmitForm)));
 
 const styles = StyleSheet.create({
   container: {

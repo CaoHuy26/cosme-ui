@@ -37,7 +37,6 @@ const cartReducers = (state = initialState, action) => {
           total: state.total + 1
         }
       }
-      // TODO: Case REMOVE_TO_CART
 
     case ActionTypes.INCREASE_QUANTITY_ORDER_PRODUCT:
       return {
@@ -64,6 +63,13 @@ const cartReducers = (state = initialState, action) => {
           : product
         )
       }
+
+      case ActionTypes.REMOVE_ALL_CART:
+        return {
+          ...state,
+          productsInCart: [],
+          total: 0
+        }
 
     default:
       return state

@@ -39,19 +39,19 @@ const CustomerInformationForm = props => {
   return (
     <View style={styles.container}>
       <Field 
-        name='customerName'
+        name='receiverName'
         labelName='Họ tên khách hàng'
         component={renderInputField}
       />
       
       <Field 
-        name='customerAddress'
+        name='shippingAddress'
         labelName='Địa chỉ'
         component={renderInputField}
       />
       
       <Field 
-        name='customerPhoneNumber'
+        name='receiverPhone'
         labelName='Số điện thoại'
         keyboardType='phone-pad'
         component={renderInputField}

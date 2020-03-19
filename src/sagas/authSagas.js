@@ -10,7 +10,7 @@ function* login(data) {
       password: data.payload.password
     };
     const res = yield axios.post('http://localhost:3000/auth/login', user);
-    console.log(`Response: ${JSON.stringify(res.data)}`)
+    // console.log(`AuthSage-Login response: ${JSON.stringify(res.data, null, 4)}`)
     if (res.data.statusCode === 200) {
       yield put({
         type: ActionTypes.USER_LOGIN_SUCCESS,

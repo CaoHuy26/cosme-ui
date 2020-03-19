@@ -18,6 +18,11 @@ const cartActions = {
       type: ActionTypes.DECREASE_QUANTITY_ORDER_PRODUCT,
       orderProductId
     }
+  },
+  removeAllCart: () => {
+    return {
+      type: ActionTypes.REMOVE_ALL_CART
+    }
   }
 };
 
