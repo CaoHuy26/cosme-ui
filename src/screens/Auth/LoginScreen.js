@@ -9,7 +9,6 @@ import {
 } from "react-native";
 
 import { connect } from 'react-redux';
-import axios from "axios";
 import authActions from '../../actions/authActions';
 
 const { width } = Dimensions.get("window");
@@ -25,7 +24,11 @@ class LoginScreen extends Component {
   }
 
   render() {
-    console.log(this.props.user)
+    const { user } = this.props;
+    if (user.isLoggedIn) {
+      this.props.navigation.replace('Profile');
+    }
+
     return (
       <View style={styles.container}>
         <View>
