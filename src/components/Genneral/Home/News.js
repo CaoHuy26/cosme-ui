@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Image, Dimensions } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
 
 const { width } = Dimensions.get('window');
 

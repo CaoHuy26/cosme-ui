@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import Product from './Product';
 
-class ListProduct extends Component {
+class ProductList extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -12,7 +12,7 @@ class ListProduct extends Component {
               key={product.id}
               {...product}
               // TODO: Change imageUrl
-              imageUrl={require('../../../assets/product/fake_product2.jpg')}
+              imageUrl={require('../../../../assets/product/fake_product2.jpg')}
             />
           ))
           }
@@ -20,7 +20,7 @@ class ListProduct extends Component {
     );
   }
 }
-export default ListProduct;
+export default ProductList;
 
 const styles = StyleSheet.create({
   container: {

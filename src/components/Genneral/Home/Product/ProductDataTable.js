@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View } from "react-native";
 import { DataTable } from 'react-native-paper';
 
-class DataProductTable extends Component {
+class ProductDataTable extends Component {
   render() {
     return (
       <View>
@@ -32,4 +32,4 @@ class DataProductTable extends Component {
     );
   }
 }
-export default DataProductTable;
+export default ProductDataTable;

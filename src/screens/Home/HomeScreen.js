@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
-
-import { Search, SliderNews, CategoryLayout, ProductLayout } from "../../components/Layout/HomeLayout";
+import { InputSearch, SliderNews, CategoryList } from '../../components/Genneral/Home';
+import { ProductLayout } from '../../components/Genneral/Home/Product';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class HomeScreen extends Component {
         <View style={styles.container}>
           <View style={{ flex: 1 }}>
             {/* INPUT SEARCH */}
-            <Search />
+            <InputSearch />
 
             <ScrollView>
               <View style={{ flex: 1, paddingTop: 20 }}>
@@ -49,7 +49,7 @@ class HomeScreen extends Component {
                 {/* CATEGORY */}
                 <View style={{ marginTop: 40 }}>
                   <Text style={styles.textTitle}>Category</Text>
-                  <CategoryLayout />
+                  <CategoryList />
                 </View>
 
                 {/* PRODUCTS */}

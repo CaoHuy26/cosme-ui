@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Image, Dimensions, StyleSheet } from "react-native";
 import StarRating from "react-native-star-rating";
-import DataProductTable from "./DataProductTable";
+import ProductDataTable from "./ProductDataTable";
 
 const { width } = Dimensions.get("window");
 
@@ -40,7 +40,7 @@ class ProductDetail extends Component {
 
           <View>
             <Text style={styles.textTitle}>Thông tin chi tiết</Text>
-            <DataProductTable />
+            <ProductDataTable />
           </View>
         </View>
       </View>

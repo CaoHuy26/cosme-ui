@@ -4,8 +4,8 @@ import StarRating from "react-native-star-rating";
 import Icon from "react-native-vector-icons/Ionicons";
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import formatToVND from "../../../utils/formatToVND";
-import cartActions from '../../../actions/cartActions';
+import formatToVND from "../../../../utils/formatToVND";
+import cartActions from '../../../../actions/cartActions';
 
 const { width } = Dimensions.get("window");
 

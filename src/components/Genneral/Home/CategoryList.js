@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { withNavigation } from 'react-navigation';
-import { Category } from '../../Genneral/Common';
+import Category from './Category';
 import CATEGORY from '../../../constants/category';
 
-class CategoryLayout extends Component {  
+class CategoryList extends Component {  
   render() {
     return (
       <View style={styles.container}>
@@ -30,7 +30,7 @@ class CategoryLayout extends Component {
     );
   }
 }
-export default withNavigation(CategoryLayout);
+export default withNavigation(CategoryList);
 
 const styles = StyleSheet.create({
   container: {

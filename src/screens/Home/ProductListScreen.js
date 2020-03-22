@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Button, Text } from "react-native";
-import { ProductLayout } from "../../components/Layout/HomeLayout";
+import { ProductLayout } from "../../components/Genneral/Home/Product";
 
 class ProductListScreen extends Component {
   render() {

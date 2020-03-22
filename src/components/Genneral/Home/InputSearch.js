@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import { 
-  View,
-  Text,
-  StyleSheet,
-  TextInput
-} from "react-native";
+import { View, StyleSheet, TextInput } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 
-class Search extends Component {
+class InputSearch extends Component {
   render() {
     return (
         <View style={{ height: 80 }}>
@@ -22,7 +17,7 @@ class Search extends Component {
     );
   }
 }
-export default Search;
+export default InputSearch;
 
 const styles = StyleSheet.create({
   inputSearch: {
