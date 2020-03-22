@@ -1,12 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-import { OrderScreen } from '../../screens/MainScreen';
+import { OrderListScreen } from '../../screens/Order';
 import { PaymentScreen } from '../../screens/Order';
 
 const OrderStack = createStackNavigator(
   {
     Order: {
-      screen: OrderScreen
+      screen: OrderListScreen
     },
     Payment: {
       screen: PaymentScreen

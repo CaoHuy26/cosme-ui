@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import commonStyles from '../../styles/common';
-import { ButtonCustomerInfomationForm } from "../../components/Genneral/Order/Payment";
-import { OrderProductDetailList, TotalAmount, CustomerInformationForm} from "../../components/Genneral/Order/Payment";
+import commonStyles from '../../../styles/common';
+import { ButtonCustomerInfomationForm } from "../../../components/Genneral/Order/Payment";
+import { OrderProductDetailList, TotalAmount, CustomerInformationForm } from "../../../components/Genneral/Order/Payment";
 
 class PaymentScreen extends Component {
   render() {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-import { NotificationScreen } from '../../screens/MainScreen/index.js';
+import { NotificationListScreen } from '../../screens/Notification';
 
 const NotificationStack = createStackNavigator(
   {
     Notification: {
-      screen: NotificationScreen
+      screen: NotificationListScreen
     }
   },
   {

@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Button, Dimensions, ScrollView, Image } from "react-native";
 import { Tabs } from '@ant-design/react-native';
 import { connect } from 'react-redux';
-import OrderList from "../../components/Genneral/Order/OrderList";
-import CustomButton from "../../components/Genneral/Common/CustomButton";
-import formatToVND from '../../utils/formatToVND';
+import OrderList from "../../../components/Genneral/Order/OrderList";
+import CustomButton from "../../../components/Genneral/Common/CustomButton";
+import formatToVND from '../../../utils/formatToVND';
 
 const { height } = Dimensions.get('window');
 
-class OrderScreen extends Component {
+class OrderListScreen extends Component {
   render() {
     const tabs = [
       {title: 'Giỏ hàng'},
@@ -24,7 +24,7 @@ class OrderScreen extends Component {
       <View style={styles.emptyOrder}>
         <Image
           style={styles.emptyOrderImage}
-          source={require('../../assets/illustration/empty-list.png')}
+          source={require('../../../assets/illustration/empty-list.png')}
         />
         <Text style={styles.emptyOrderText}>
           Giỏ hàng trống 😭😭😭
@@ -63,7 +63,7 @@ class OrderScreen extends Component {
       <View style={styles.emptyOrder}>
         <Image
           style={styles.emptyOrderImage}
-          source={require('../../assets/illustration/delivery.png')}
+          source={require('../../../assets/illustration/delivery.png')}
         />
         <Text style={styles.emptyOrderText}>
           Bạn chưa có đơn hàng nào 😭😭😭
@@ -102,7 +102,7 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(OrderScreen);
+export default connect(mapStateToProps)(OrderListScreen);
 
 const styles = StyleSheet.create({
   container: {

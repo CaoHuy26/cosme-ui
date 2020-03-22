@@ -2,8 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from 'react-navigation-stack';
-import { HomeScreen } from '../../screens/MainScreen/index.js';
-import { ProductDetailScreen, NewsScreen, CategoryScreen } from '../../screens/Home';
+import { HomeScreen, NewsScreen, ProductListScreen, ProductDetailScreen } from '../../screens/Home';
 import OrderIconWithBadge from '../../components/IconBadge/OrderIconWithBadge.js';
 
 const headerLeft = (navigation) => (
@@ -67,7 +66,7 @@ const HomeStack = createStackNavigator(
       screen: NewsScreen
     },
     Category: {
-      screen: CategoryScreen
+      screen: ProductListScreen
     }
   },
   {

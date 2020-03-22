@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import { 
-  View,
-  StyleSheet,
-  Button,
-  Text,
-} from "react-native";
+import { View, StyleSheet, Button, Text } from "react-native";
 import { ProductLayout } from "../../components/Layout/HomeLayout";
 
-class CategoryScreen extends Component {
+class ProductListScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,7 +45,7 @@ class CategoryScreen extends Component {
     );
   }
 }
-export default CategoryScreen;
+export default ProductListScreen;
 
 const styles = StyleSheet.create({
   container: {

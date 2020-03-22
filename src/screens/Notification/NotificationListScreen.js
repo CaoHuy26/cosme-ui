@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import { 
-  View,
-  Text,
-  StyleSheet,
-  FlatList
-} from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { Notification } from '../../components/Genneral/Common';
 
 const fakeNotificationData = [
@@ -26,7 +21,7 @@ const fakeNotificationData = [
   }
 ];
 
-class NotificationScreen extends Component {
+class NotificationListScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -41,7 +36,7 @@ class NotificationScreen extends Component {
     );
   }
 }
-export default NotificationScreen;
+export default NotificationListScreen;
 
 const styles = StyleSheet.create({
   container: {

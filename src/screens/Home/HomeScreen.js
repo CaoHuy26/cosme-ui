@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 
 import { Search, SliderNews, CategoryLayout, ProductLayout } from "../../components/Layout/HomeLayout";
 
