@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import { 
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { connect } from 'react-redux';
 import cartActions from '../../actions/cartActions';
-import { ProductLayout } from '../../components/Layout/HomeLayout';
-import { ProductDetail } from '../../components/Genneral/Product';
+import { ProductDetail, ProductLayout } from '../../components/Genneral/Home/Product';
 import CustomButton from "../../components/Genneral/Common/CustomButton";
 
 class ProductDetailScreen extends Component {
