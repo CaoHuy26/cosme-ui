@@ -52,13 +52,11 @@ class ButtonHandleSubmitForm extends Component {
         products: productsInCart
       };
       this.props.createOrder(newOrder);
-    };
 
-    if (this.props.order.success) {
-      alert('Đặt hành thành công');
-      this.props.navigation.navigate('Order');
       this.props.removeAllCart();
-    }
+      this.props.navigation.replace('PaymentReport');
+    };
+    
     return (
       <View style={styles.container}>
         <View style={commonStyles.button}>

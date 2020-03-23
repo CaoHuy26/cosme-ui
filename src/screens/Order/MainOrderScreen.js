@@ -28,7 +28,7 @@ class MainOrderScreen extends Component {
         </View>
         <View>
           {
-            false
+            true // test
               ? <OrderListScreen />
               : <EmptyOrderScreen />
           }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import { OrderList } from '../../../components/Genneral/Order';
+import { CartOrderList } from '../../../components/Genneral/Order';
 import { CustomButton } from '../../../components/Genneral/Common';
 import formatToVND from '../../../utils/formatToVND';
 
@@ -21,7 +21,7 @@ class CartOrderListScreen extends Component {
         <ScrollView style={{height: height - 350}}
           showsVerticalScrollIndicator={false}
         >
-          <OrderList />
+          <CartOrderList />
         </ScrollView>
 
         <View style={{paddingVertical: 20, paddingHorizontal: 23}}>

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from 'react-redux';
-import Order from "./Order";
+import CartOrder from "./CartOrder";
 
-class OrderList extends Component {
+class CartOrderList extends Component {
   /**
    * this.props.cart
    * @param {object} productsInCart
@@ -16,7 +16,7 @@ class OrderList extends Component {
       <View style={styles.container}>
         {
           productsInCart.map(product => (
-            <Order
+            <CartOrder
               key={product.id}
               orderProduct={product}
               total={total}
@@ -34,7 +34,7 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(OrderList);
+export default connect(mapStateToProps)(CartOrderList);
 
 const styles = StyleSheet.create({
   container: {

@@ -1,19 +1,28 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-import { MainOrderScreen } from '../../screens/Order';
-import { PaymentScreen } from '../../screens/Order';
+import { MainOrderScreen, PaymentScreen, PaymentReportScreen, OrderDetailScreen } from '../../screens/Order';
 
 const OrderStack = createStackNavigator(
   {
-    Order: {
-      screen: MainOrderScreen
+    MainOrder: {
+      screen: MainOrderScreen,
+      navigationOptions: {
+        // Config Header title
+        title: 'Order' 
+      }
     },
     Payment: {
       screen: PaymentScreen
+    },
+    PaymentReport: {
+      screen: PaymentReportScreen
+    },
+    OrderDetail: {
+      screen: OrderDetailScreen
     }
   },
   {
-    initialRouteName: 'Order'
+    initialRouteName: 'MainOrder'
   }
 );
 

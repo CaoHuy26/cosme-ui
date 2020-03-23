@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
-import formatToVND from "../../../utils/formatToVND";
-import cartActions from '../../../actions/cartActions';
+import formatToVND from "../../../../utils/formatToVND";
+import cartActions from '../../../../actions/cartActions';
 
-class Order extends Component {
+class CartOrder extends Component {
   /**
    * this.props.orderProduct
    * @param {string} id
@@ -27,7 +27,7 @@ class Order extends Component {
   render() {
     const { id, imageUrl, name, price, quantityOrder } = this.props.orderProduct;
     return (
-      <View style={styles.order}>
+      <View style={styles.cartOrder}>
         <View style={{flex: 1, flexDirection: 'row'}}>
           {/* RIGHT */}
           <View style={{flex: 3, flexDirection: 'row'}}>
@@ -35,7 +35,7 @@ class Order extends Component {
             <View style={{flex: 1, padding: 5}}>
               <Image 
                 style={styles.imageThumbnail}
-                source={require('../../../assets/product/fake_product1.jpg')}
+                source={require('../../../../assets/product/fake_product1.jpg')}
               />
             </View>
 
@@ -86,10 +86,10 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(null, mapDispatchToProps)(Order);
+export default connect(null, mapDispatchToProps)(CartOrder);
 
 const styles = StyleSheet.create({
-  order: {
+  cartOrder: {
     marginTop: 15,
     height: 100,
     backgroundColor: 'white'
