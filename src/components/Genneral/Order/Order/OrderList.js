@@ -1,31 +1,16 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { connect } from 'react-redux';
+import { View, StyleSheet } from "react-native";
 import Order from './Order';
-
-const fakeData = [
-  {
-    id: '1',
-    title: '1'
-  },
-  {
-    id: '2',
-    title: '2'
-  },
-  {
-    id: '3',
-    title: '2'
-  }
-]
 
 class OrderList extends Component {
   render() {
     return (
       <View style={styles.container}>
         {
-          fakeData.map(order => (
+          this.props.orders.map(order => (
             <Order
               key={order.id}
+              {...order}
             />
           ))
         }
@@ -34,13 +19,7 @@ class OrderList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-
-  }
-};
-
-export default connect(mapStateToProps)(OrderList);
+export default OrderList;
 
 const styles = StyleSheet.create({
   container: {

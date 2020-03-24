@@ -6,6 +6,12 @@ const orderActions = {
       type: ActionTypes.CREATE_ORDER_REQUEST,
       order
     }
+  },
+  getOrderByUserId: (userId) => {
+    return {
+      type: ActionTypes.FETCH_ORDER_REQUEST,
+      userId
+    }
   }
 };
 

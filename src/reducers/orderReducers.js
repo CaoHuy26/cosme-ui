@@ -2,8 +2,10 @@ import ActionTypes from '../actions/types';
 
 const initialState = {
   isCreatingOrder: false,
+  isFetching: false,
   success: false,
-  order: {}
+  order: {}, // creating
+  orders: [] // fetching
 };
 
 const OrderReducers = (state = initialState, action) => {
@@ -21,6 +23,25 @@ const OrderReducers = (state = initialState, action) => {
         isCreatingOrder: false,
         success: true,
         order
+      }
+    }
+
+    case ActionTypes.FETCH_ORDER_REQUEST: {
+      return {
+        ...state,
+        success: false,
+        isFetching: true,
+        orders: []
+      }
+    }
+
+    case ActionTypes.FETCH_ORDER_SUCCESS: {
+      const { orders } = action.payload.data;
+      return {
+        ...state,
+        success: true,
+        isFetching: false,
+        orders
       }
     }
 

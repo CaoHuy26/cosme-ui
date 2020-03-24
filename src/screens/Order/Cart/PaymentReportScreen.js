@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { withNavigation } from 'react-navigation';
 import { CustomButton } from '../../../components/Genneral/Common';
 
@@ -11,7 +11,12 @@ class PaymentReportScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Đặt hàng thành công</Text>
+        <View>
+          <Image
+            style={styles.successImage}
+            source={require('../../../assets/illustration/success.png')}
+          />
+        </View>
 
         <CustomButton
           title='Tiếp tục mua sắm'
@@ -29,5 +34,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  successImage: {
+    width: 250,
+    height: 250
   }
 });
