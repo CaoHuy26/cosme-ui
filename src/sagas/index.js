@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 import { loginWatcher, registerWatcher } from './authSagas';
 import { getProductsWatcher } from './productSagas';
 import { createOrderWatcher, getOrderByUserIdWatcher } from './orderSagas';
+import { createNotificationWatcher, getNotificationsByUserIdWatcher } from './notificationSagas';
 
 function* rootSaga() {
   yield all([
@@ -9,7 +10,9 @@ function* rootSaga() {
     registerWatcher(),
     getProductsWatcher(),
     createOrderWatcher(),
-    getOrderByUserIdWatcher()
+    getOrderByUserIdWatcher(),
+    createNotificationWatcher(),
+    getNotificationsByUserIdWatcher()
   ]);
 }
 

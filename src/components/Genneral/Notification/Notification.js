@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
+import convertStringToDatetime from '../../../utils/convertStringToDatetime';
 
 //TODO: ADD SwipeOut
 
 class Notification extends Component {
   render() {
+    const { time, message } = this.props;
     return (
       <View style={styles.notification}>
         <View style={{flex: 1, flexDirection: 'row'}}>
@@ -19,8 +21,8 @@ class Notification extends Component {
           </View>
 
           <View style={styles.content}>
-            <Text>{this.props.item.message}</Text>
-            <Text style={{color: 'grey'}}>16.00</Text>
+            <Text>{message}</Text>
+            <Text style={{color: 'grey'}}>{convertStringToDatetime(time)}</Text>
           </View>
         </View>
       </View>      

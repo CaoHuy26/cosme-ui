@@ -4,6 +4,7 @@ import { loginReducers, registerReducers } from './auth';
 import productReducers from './productReducers';
 import cartReducers from './cartReducers';
 import orderReducers from './orderReducers';
+import notificationReducers from './notificationReducers';
 
 const allReducers = combineReducers({
   form: formReducer,
@@ -11,7 +12,8 @@ const allReducers = combineReducers({
   registerReducers,
   productReducers,
   cartReducers,
-  orderReducers
+  orderReducers,
+  notificationReducers
 });
 
 export default allReducers;

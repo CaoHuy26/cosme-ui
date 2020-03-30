@@ -1,10 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import IconWithBadge from "./IconWithBadge"
+import notificationActions from '../../actions/notificationActions';
 
-const NotificationIconWithBadge = props => {
-  // You should pass down the badgeCount in some other ways like:
-  // React Context API, Redux, MobX or event emitters.
-  return <IconWithBadge {...props} badgeCount={3} />;
+class NotificationIconWithBadge extends React.Component{
+  componentDidMount() {
+    this.props.getNotificationsByUserId('b93e7a50-fa66-406d-9fae-ce912d7bda7f'); //FIXME: Fix userID
+  };
+
+  render() {
+    let count = 0;
+    const { notifications } = this.props.notifications || [];
+    if (!notifications) {
+      count = 0;
+    }
+    else {
+      count = notifications.length;
+    }
+    return (
+      <IconWithBadge {...this.props} badgeCount={count} />
+    );
+  }
+} 
+
+const mapStateToProps = state => {
+  return {
+    notifications: state.notificationReducers
+  }
 };
 
-export default NotificationIconWithBadge;
+const mapDispatchToProps = dispatch => {
+  return {
+    getNotificationsByUserId:
+      userId => dispatch(notificationActions.getNotificationsByUserId(userId))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationIconWithBadge);

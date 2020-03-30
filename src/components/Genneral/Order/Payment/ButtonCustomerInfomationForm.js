@@ -8,6 +8,7 @@ import { phoneNumber } from '../../../../constants/regExr';
 import { CUSTOMER_INFOMATION_FORM } from '../../../../constants/formName';
 import orderActions from '../../../../actions/orderActions';
 import cartActions from "../../../../actions/cartActions";
+import notificationActions from "../../../../actions/notificationActions";
 
 const validate = values => {
   const errors = {};
@@ -51,7 +52,14 @@ class ButtonHandleSubmitForm extends Component {
         total: totalMoney,
         products: productsInCart
       };
-      this.props.createOrder(newOrder);
+      const notification = {
+        userId: 'b93e7a50-fa66-406d-9fae-ce912d7bda7f', //FIXME: change userId
+        notification: 'Đặt hàng thành công',
+        time: new Date()
+      };
+
+      // TODO: Fix auto generate 2 notifications
+      this.props.createOrder(newOrder, notification);
 
       this.props.removeAllCart();
       this.props.navigation.replace('PaymentReport');
@@ -86,8 +94,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createOrder: (order) => dispatch(orderActions.createOrder(order)),
-    removeAllCart: () => dispatch(cartActions.removeAllCart())
+    createOrder: (order, notification) => {
+      dispatch(orderActions.createOrder(order));
+      dispatch(notificationActions.createNotification(notification))
+    },
+    removeAllCart: () => dispatch(cartActions.removeAllCart()),
   }
 }
 
