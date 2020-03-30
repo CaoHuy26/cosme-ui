@@ -1,12 +1,12 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { API_URL } from 'react-native-dotenv';
 import ActionTypes from '../actions/types';
 
 function* createOrder(payload) {
   try {
     const { order } = payload;
-    const orderApi = 'http://localhost:3000/o/order';
-    const res = yield axios.post(orderApi, order);
+    const res = yield axios.post(`${API_URL}/o/order`, order);
     if (res.data.statusCode === 200) {
       yield put({
         type: ActionTypes.CREATE_ORDER_SUCCESS,
@@ -36,8 +36,7 @@ function* createOrderWatcher() {
 function* getOrderByUserId(payload) {
   try {
     const { userId } = payload;
-    const orderOfUserApi = `http://localhost:3000/o/u/${userId}`;
-    const res = yield axios.get(orderOfUserApi);
+    const res = yield axios.get(`${API_URL}/o/u/${userId}`);
     // console.log(`GET ORDER OF USER: ${JSON.stringify(res.data, null, 4)}`)
     if (res.data.statusCode === 200) {
       yield put({

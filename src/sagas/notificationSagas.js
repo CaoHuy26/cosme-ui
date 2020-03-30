@@ -1,12 +1,12 @@
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import { API_URL } from 'react-native-dotenv';
 import ActionTypes from '../actions/types';
 
 function* createNotification(payload) {
   try {
     const { notification } = payload;
-    const api = 'http://localhost:3000/notification';
-    const res = yield axios.post(api, notification);
+    const res = yield axios.post(`${API_URL}/notification`, notification);
     if (res.data.statusCode === 200) {
       yield put({
         type: ActionTypes.CREATE_NOTIFICATION_SUCCESS,
@@ -35,8 +35,7 @@ function* createNotificationWatcher() {
 function* getNotificationsByUserId(payload) {
   try {
     const { userId } = payload;
-    const notificationApi = `http://localhost:3000/notification/${userId}`;
-    const res = yield axios.get(notificationApi);
+    const res = yield axios.get(`${API_URL}/notification/${userId}`);
     // console.log(`GET NOTIFICATION OF USER: ${JSON.stringify(res.data, null, 4)}`)
     if (res.data.statusCode === 200) {
       yield put({

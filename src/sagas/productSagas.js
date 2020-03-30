@@ -1,11 +1,12 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { API_URL } from 'react-native-dotenv';
 import ActionTypes from '../actions/types';
 
 function* getProducts(pageRequest) {
   try {
     const { page, query } = pageRequest;
-    let productApi = `http://localhost:3000/p/products?page=${page}`;
+    let productApi = `${API_URL}/p/products?page=${page}`;
     if (query) {
       const { categoryId } = query;
       if (categoryId) {

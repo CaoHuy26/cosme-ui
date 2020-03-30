@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import { API_URL } from 'react-native-dotenv';
 import ActionTypes from '../actions/types';
-
 
 function* login(data) {
   try {
@@ -9,7 +9,7 @@ function* login(data) {
       email: data.payload.email,
       password: data.payload.password
     };
-    const res = yield axios.post('http://localhost:3000/auth/login', user);
+    const res = yield axios.post(`${API_URL}/auth/login`, user);
     // console.log(`AuthSage-Login response: ${JSON.stringify(res.data, null, 4)}`)
     if (res.data.statusCode === 200) {
       yield put({
