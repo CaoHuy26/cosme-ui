@@ -23,26 +23,53 @@ class MainOrderScreen extends Component {
 
     const { productsInCart } = this.props.cart;
     const { orders } = this.props.order || [];
+    const { isLoggedIn } = this.props.user;
+    
+    const CartProduct = (
+      <View>
+        {
+          productsInCart.length > 0
+            ? <CartOrderListScreen />
+            : <EmptyCartScreen />
+        }
+      </View>
+    );
 
-    return (
+    const CartOrder = (
+      <View>
+        {
+          orders.length > 0
+            ? <OrderListScreen
+                orders={this.props.order.orders}
+              />
+            : <EmptyOrderScreen />
+        }
+      </View>
+    );
+
+    const Tab = (
       <Tabs tabs={tabs}>
         <View>
           {
-            productsInCart.length > 0
-              ? <CartOrderListScreen />
-              : <EmptyCartScreen />
+            CartProduct
           }
         </View>
         <View>
           {
-            orders.length > 0
-              ? <OrderListScreen
-                  orders={this.props.order.orders}
-                />
-              : <EmptyOrderScreen />
+            CartOrder
           }
         </View>
       </Tabs>
+    );
+
+    return (
+      <>
+        {
+          isLoggedIn
+            ? Tab
+            : CartProduct
+        }
+      </>
     );
   }
 }
@@ -50,7 +77,8 @@ class MainOrderScreen extends Component {
 const mapStateToProps = state => {
   return {
     cart: state.cartReducers,
-    order: state.orderReducers
+    order: state.orderReducers,
+    user: state.loginReducers
   }
 };
 
