@@ -1,23 +1,37 @@
-import React, { Component } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
+import { withNavigation } from 'react-navigation';
 
-class InputSearch extends Component {
-  render() {
-    return (
-        <View style={{ height: 80 }}>
-          <View style={styles.inputSearch}>
+const InputSearch = (props) => {
+  const [productName, setProductName] = useState('');
+
+  const _onSearch = () => {
+    props.navigation.push('Search', productName);
+    setProductName('');
+  };
+
+  return (
+      <View style={{ height: 80 }}>
+        <View style={styles.inputSearch}>
+          <TextInput
+            keyboardType="web-search"
+            style={{ flex: 1 }}
+            placeholder="What are you looking for?"
+            onChangeText={name => setProductName(name)}
+            value={productName}
+          />
+          <TouchableOpacity
+            onPress={() => _onSearch()}
+          >
             <Icon name="ios-search" size={24} style={{ marginRight: 10 }} />
-            <TextInput
-              placeholder="What are you looking for?"
-              style={{ flex: 1 }}
-            />
-          </View>
+          </TouchableOpacity>
         </View>
-    );
-  }
-}
-export default InputSearch;
+      </View>
+  );
+};
+
+export default withNavigation(InputSearch);
 
 const styles = StyleSheet.create({
   inputSearch: {
