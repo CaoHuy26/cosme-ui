@@ -1,7 +1,7 @@
 import ActionTypes from '../actions/types';
 
 const initialState = {
-  isFetching: true,
+  isFetching: false,
   success: false,
   products: [],
   error: null
@@ -19,7 +19,7 @@ const productReducers = (state = initialState, action) => {
         ...state,
         isFetching: false,
         success: true,
-        products: action.payload
+        products: [...state.products, ...action.payload]
       }
     case ActionTypes.PRODUCT_FETCH_FAILURE:
       return {

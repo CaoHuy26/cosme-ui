@@ -7,12 +7,12 @@ function* getProducts(pageRequest) {
   try {
     const { page, query } = pageRequest;
     let productApi = `${API_URL}/p/products?page=${page}`;
-    if (query) {
-      const { categoryId } = query;
-      if (categoryId) {
-        productApi += `&categoryId=${categoryId}`;
-      }
-    }
+    // if (query) {
+    //   const { categoryId } = query;
+    //   if (categoryId) {
+    //     productApi += `&categoryId=${categoryId}`;
+    //   }
+    // }
     console.log(`GET 👉 ${productApi}`);
     
     const res = yield axios.get(productApi);

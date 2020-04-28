@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, ActivityIndicator, Button } from "react-native";
 import { withNavigation } from 'react-navigation';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import productActions from '../../../../actions/productActions';;
 import ProductList from "./ProductList";
 
@@ -38,94 +38,48 @@ const initialProductData = [
   }
 ];
 
-let query = {};
+function ProductLayout() {
 
-class ProductLayout extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isFetching: true,
-      products: [],
-      page: 1
-    };
-  }
-
-  componentDidMount() {
-    const { params } = this.props.navigation.state;
-    if (this.props.navigation.state.routeName === 'Category') {
-      query.categoryId = params.id;
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const productReducers = useSelector(state => state.productReducers);
+  
+  useEffect(() => {
+    function fetchData() {
+      dispatch(productActions.getProducts(page))
     }
-    this.props.getProducts(this.state.page, query);
-    const { products, isFetching } = this.props.productData
-    this.setState({
-      isFetching: false, // this.props.productData.isFetching
-      products: this.state.products.concat(products)
-    });
-  };
+    fetchData();
+  }, [page]);
 
-  // TODO: Learn component lifecycle and use here
-
-  getData() {
-    this.props.getProducts(this.state.page, query);
-    const { products } = this.props.productData;
-    this.setState({
-      isFetching: false,
-      products: this.state.products.concat(products)
-    });
-  };
-
-  handleLoadMore () {
-    this.setState(
+  return (
+    <>
       {
-        isFetching: true,
-        page: this.state.page + 1
-      }, 
-      this.getData
-    );
-  };
-
-  render() {
-    // console.log(`PROPS: ${JSON.stringify(this.props, null, 4)}`)
-    if (this.state.isFetching) {
-      return (
-        <View>
-          <ActivityIndicator size="small" color="pink" />
-        </View>
-      )
-    }
-    else {
-      return (
-        <View style={styles.container}>
-          <ProductList products={this.state.products}/>
-          
-          <View style={{marginVertical: 20}}>
-            <Button
-              title='Xem thêm'
-              onPress={() => this.handleLoadMore()}
-            />
+        productReducers.isFetching
+        ? (
+          <View>
+            <ActivityIndicator size="small" color="pink" />
           </View>
-          
-        </View>
-      );
-    }
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    productData: state.productReducers
-  }
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getProducts: (page, query) => dispatch(productActions.getProducts(page, query))
-  }
+        )
+        : (
+          <View style={styles.container}>
+            <ProductList products={productReducers.products}/>
+            
+            <View style={{marginVertical: 20}}>
+              <Button
+                title='Xem thêm'
+                onPress={() => setPage(page + 1)}
+              />
+            </View>
+            
+          </View>
+        )
+      }
+    </>
+  );
 }
 
 // withNavigation: Access the navigation props to any component
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(ProductLayout));
+export default withNavigation(ProductLayout);
 
 const styles = StyleSheet.create({
   container: {
